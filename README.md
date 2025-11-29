@@ -35,16 +35,23 @@ terminal-chat/
 
 ## Quick Start
 
-### Using Docker Compose (Recommended)
+### Recommended Setup
 
-1. Start the server and client:
+1. Start the server using Docker:
 ```bash
-docker-compose up --build
+docker-compose up --build server
 ```
 
-2. The client will automatically connect to the server.
+2. In separate terminals, start clients:
+```bash
+# Terminal 1
+cd client && go run main.go user1
 
-### Manual Setup
+# Terminal 2
+cd client && go run main.go user2
+```
+
+### Manual Setup (Alternative)
 
 1. Start the server:
 ```bash
@@ -54,12 +61,8 @@ go run main.go
 
 2. In another terminal, start the client:
 ```bash
-# Option 1: Direct command
 cd client
 go run main.go [username]
-
-# Option 2: Using the helper script
-./run-client.sh [username]
 ```
 
 ## Controls
@@ -90,8 +93,8 @@ cd client && go build -o client main.go
 
 ### Testing
 
-1. Start the server
-2. Open multiple terminals and run the client with different usernames
+1. Start the server with Docker: `docker-compose up server`
+2. Open multiple terminals and run: `cd client && go run main.go [username]`
 3. Send messages between clients
 
 ## Architecture Details
