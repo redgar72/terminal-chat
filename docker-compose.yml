@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - GO_ENV=development
+    volumes:
+      - ./server:/app
+    command: go run main.go
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    depends_on:
+      - server
+    environment:
+      - GO_ENV=development
+    volumes:
+      - ./client:/app
+      - /tmp
+    command: go run main.go user1
+    stdin_open: true
+    tty: true
+
+networks:
+  default:
+    driver: bridge
